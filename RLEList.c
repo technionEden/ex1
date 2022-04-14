@@ -2,7 +2,7 @@
 
 
 int main() {
-    /*
+
     // FOR DEBUGGING, ERASE LATER !!
 	RLEList myList = RLEListCreate();
     printf("hello\n");
@@ -17,10 +17,21 @@ int main() {
     RLEListAppend(myList,'C');
     printRLEList(myList);
     printf("size: %d\n",RLEListSize(myList));
+    RLEListResult myResult = RLE_LIST_SUCCESS;
+
+    printf("Letter at index 7\n");
+    printf("Letter: %c\n",RLEListGet(myList,7,&myResult));
+
+    printf("Letter at index 10\n");
+    char let = RLEListGet(myList,10,&myResult);
+    printf("Letter: %d Result: %i\n",let,myResult);
 
     printf("Remove index==5\n");
     RLEListRemove(myList,5);
     printRLEList(myList);
+
+    printf("Letter at index 7\n");
+    printf("Letter: %c\n",RLEListGet(myList,7,&myResult));
 
     printf("Remove index==5\n");
     RLEListRemove(myList,5);
@@ -50,10 +61,14 @@ int main() {
     RLEListRemove(myList,1);
     printRLEList(myList);
 
+    printf("Letter at index 1\n");
+    printf("Letter: %c\n",RLEListGet(myList,1,&myResult));
+
+
     printRLEListFullData(myList);
 
     RLEListDestroy(myList);
-    */
+
 	return 0;
 }
 
@@ -172,6 +187,32 @@ void RLEListCleanUp(RLEList prevNode)
     RLEList newNext = toDelete->next;
     prevNode->next = newNext;
     free(toDelete);
+}
+
+
+char RLEListGet(RLEList list, int index, RLEListResult *result)
+{
+    if(!list) {
+        *result =  RLE_LIST_NULL_ARGUMENT;
+        return 0;
+    }
+    if(RLEListSize(list)<index) {
+        *result =  RLE_LIST_INDEX_OUT_OF_BOUNDS;
+        return 0;
+    }
+
+    RLEList ptr = list;
+    int amountLetters = 0;
+    while(amountLetters + ptr->amount < index && ptr) {
+        amountLetters += ptr->amount;
+        ptr = ptr->next;
+    }
+    if(ptr->letter){
+        *result =  RLE_LIST_SUCCESS;
+        return ptr->letter;
+    }
+    return 0;
+
 }
 
 
