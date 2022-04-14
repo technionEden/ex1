@@ -158,7 +158,6 @@ RLEListResult RLEListRemove(RLEList list, int index)
     ptr->amount = (ptr->amount) - 1;
 
     if(ptr->amount == 0) {
-        printf("Cleaning out Node with letter %c\n", ptr->letter);
         RLEListCleanUp(prev);
     }
 
