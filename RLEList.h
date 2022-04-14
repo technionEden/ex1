@@ -159,6 +159,9 @@ RLEListResult RLEListMap(RLEList list, MapFunction map_function);
 
 
 
+int countNodes(RLEList list);
+
+
 
 // ----------------------------------------- FOR DEBUGGING !!! -----------------------------------------
 // ERASE LATER !!!
