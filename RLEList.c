@@ -4,7 +4,9 @@
 int main() {
 
     // FOR DEBUGGING, ERASE LATER !!
+
     /*
+
 	RLEList myList = RLEListCreate();
     printf("hello\n");
     RLEListAppend(myList,'W');
@@ -16,6 +18,17 @@ int main() {
     RLEListAppend(myList,'B');
     RLEListAppend(myList,'C');
     RLEListAppend(myList,'C');
+    RLEListAppend(myList,'C');
+    RLEListAppend(myList,'C');
+    RLEListAppend(myList,'C');
+    RLEListAppend(myList,'C');
+    RLEListAppend(myList,'C');
+    RLEListAppend(myList,'C');
+    RLEListAppend(myList,'C');
+    RLEListAppend(myList,'C');
+    RLEListAppend(myList,'C');
+
+    
     printRLEList(myList);
     printf("size: %d\n",RLEListSize(myList));
     RLEListResult myResult = RLE_LIST_SUCCESS;
@@ -56,7 +69,7 @@ int main() {
 
     printf("Print Export\n");
     char * myExport = RLEListExportToString(myList, &myResult);
-    printf("Export: %s, Message: %d\n",myExport, myResult);
+    printf("Export: \n%s Message: %d\n",myExport, myResult);
     free(myExport);
 
     printf("Remove index==4\n");
@@ -74,7 +87,8 @@ int main() {
     printRLEListFullData(myList);
 
     RLEListDestroy(myList);
-     */
+
+    */
 
 	return 0;
 }
@@ -231,17 +245,26 @@ char* RLEListExportToString(RLEList list, RLEListResult* result)
     }
     // BUGGY!!! If I just have the HEAD ('$'), does it count as a NULL or not? Here I act as if it's not NULL.
     int nodes = countNodes(list->next);
+    int* digits = malloc(sizeof(int)*(nodes));
+    int digitCount = countDigits(list->next, digits);
 
-    char* exportStr = malloc(sizeof(char)*((nodes*3)+1)); // BUGGY!!! Where is the free?? Outside? Make Sure of It!
+    char* exportStr = malloc(sizeof(char)*((nodes*2)+digitCount+1)); // MAKE SURE OUTSIDE THERE'S FREE()
+
     RLEList ptr = list->next;
-    for(int i=0; i<nodes*3;i+=3) {
-        exportStr[i]=ptr->letter;
-        exportStr[i+1]=ptr->amount+'0';
-        exportStr[i+2]='\n';
+    int currIndex = 0;
+    for(int i=0; i<nodes; i++) {
+        exportStr[currIndex++]=ptr->letter;
+        while( digits[i]>0 ) {
+            exportStr[currIndex]=(ptr->amount/( calcPow(10,(digits[i]-1)) ))%10+'0';
+            digits[i]--;
+            currIndex++;
+        }
+        exportStr[currIndex++]='\n';
         ptr=ptr->next;
     }
-    exportStr[nodes*3] = '\0';
+    exportStr[(nodes*2)+digitCount] = '\0';
     *result = RLE_LIST_SUCCESS;
+    free(digits);
     return exportStr;
 }
 
@@ -254,6 +277,32 @@ int countNodes(RLEList list)
         ptr = ptr->next;
     }
     return count;
+}
+int countDigits(RLEList list, int arr[])
+{
+    RLEList ptr = list;
+    int count = 0;
+    for(int i =0; ptr; i++) {
+        int ptrAmount = ptr->amount;
+        int digitCount = 0;
+        while (ptrAmount/10>0) {
+            digitCount++;
+            ptrAmount = ptrAmount/10;
+        }
+        arr[i] = digitCount+1;
+        count+=arr[i];
+        ptr = ptr->next;
+    }
+    return count;
+}
+int calcPow(int a, int b)
+{
+    int ans = 1;
+    while(b>0) {
+        ans=ans*a;
+        b--;
+    }
+    return ans;
 }
 
 
@@ -284,3 +333,11 @@ void printRLEListFullData(RLEList list)
     printf("\n");
 }
 
+void printArray(int arr[], int length)
+{
+    printf("[");
+    for(int i=0; i<length;i++){
+        printf("%d,",arr[i]);
+    }
+    printf("]\n");
+}

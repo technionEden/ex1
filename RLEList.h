@@ -146,6 +146,38 @@ char* RLEListExportToString(RLEList list, RLEListResult* result);
 
 
 /**
+*   countNodes: Returns the amount of nodes in list.
+*
+* @param list - The RLE list whose nodes we count.
+* @return
+* 	Amount of nodes.
+*/
+int countNodes(RLEList list);
+
+/**
+*   countDigits: Counts the amount of digits of the amount attribute of each node.
+*
+* @param list - The RLE list whose quantity of digits in 'amount' attribute we count.
+* @param arr - The array were we fill the amount of digits in the 'amount' attribute of the node.
+ *              Each index corresponds to the appropriate node from the list.
+* @return
+* 	Total amount of digits counted summed from the 'amount' attribute of all the nodes in the list.
+*/
+int countDigits(RLEList list, int arr[]);
+
+
+/**
+*   calcPow: Calculates a^b;
+*
+* @param a - The base.
+* @param b - The exponent.
+* @return
+* 	a^b
+*/
+int calcPow(int a, int b);
+
+
+/**
 *   RLEListMap: Change the given RLE list's characters according to the received mapping function.
 *               This function replaces each character of the give RLE list with its mapped character.
 *
@@ -159,7 +191,6 @@ RLEListResult RLEListMap(RLEList list, MapFunction map_function);
 
 
 
-int countNodes(RLEList list);
 
 
 
@@ -167,6 +198,7 @@ int countNodes(RLEList list);
 // ERASE LATER !!!
 void printRLEList(RLEList list);
 void printRLEListFullData(RLEList list);
+void printArray(int arr[], int length);
 
 // -----------------------------------------------------------------------------------------------------
 
