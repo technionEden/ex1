@@ -4,6 +4,7 @@
 int main() {
 
     // FOR DEBUGGING, ERASE LATER !!
+    /*
 	RLEList myList = RLEListCreate();
     printf("hello\n");
     RLEListAppend(myList,'W');
@@ -53,6 +54,11 @@ int main() {
     RLEListAppend(myList,'A');
     printRLEList(myList);
 
+    printf("Print Export\n");
+    char * myExport = RLEListExportToString(myList, &myResult);
+    printf("Export: %s, Message: %d\n",myExport, myResult);
+    free(myExport);
+
     printf("Remove index==4\n");
     RLEListRemove(myList,4);
     printRLEList(myList);
@@ -68,6 +74,7 @@ int main() {
     printRLEListFullData(myList);
 
     RLEListDestroy(myList);
+     */
 
 	return 0;
 }
@@ -214,6 +221,30 @@ char RLEListGet(RLEList list, int index, RLEListResult *result)
     return 0;
 
 }
+
+
+char* RLEListExportToString(RLEList list, RLEListResult* result)
+{
+    if (!list){
+        *result = RLE_LIST_NULL_ARGUMENT;
+        return NULL;
+    }
+    // BUGGY!!! If I just have the HEAD ('$'), does it count as a NULL or not? Here I act as if it's not NULL.
+    int listSize = RLEListSize(list);
+    char* exportStr = malloc(sizeof(char)*(listSize+1)); // BUGGY!!! Where is the free?? Outside? Make Sure of It!
+    RLEList ptr = list;
+    for(int i=0; i<listSize; ) {
+        for(int j=0; j<ptr->amount;j++) {
+            exportStr[i+j]=ptr->letter;
+        }
+        i+=ptr->amount;
+        ptr=ptr->next;
+    }
+    exportStr[listSize] = '\0';
+    *result = RLE_LIST_SUCCESS;
+    return exportStr;
+}
+
 
 
 // ----------------------------------------- FOR DEBUGGING !!! -----------------------------------------
