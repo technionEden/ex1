@@ -306,6 +306,32 @@ int calcPow(int a, int b)
 }
 
 
+// NEED TO CHECK THIS !!!
+RLEListResult RLEListMap(RLEList list, MapFunction map_function)
+{
+    if (!list || !map_function) {
+        return RLE_LIST_NULL_ARGUMENT;
+    }
+
+    RLEList newList = RLEListCreate();
+    int listSize = RLEListSize(list);
+    RLEListResult result = RLE_LIST_SUCCESS;
+    for(int i=0; i<listSize; i++) {
+        char oldChar = RLEListGet(list,i,&result);
+        char newChar = map_function(oldChar);
+        RLEListAppend(newList, newChar);
+    }
+
+    RLEListDestroy(list->next);
+    list->next = NULL;
+
+    for(int i=0; i<listSize;i++) {
+        RLEListAppend(list, RLEListGet(newList,i,&result));
+    }
+
+    return RLE_LIST_SUCCESS;
+}
+
 
 // ----------------------------------------- FOR DEBUGGING !!! -----------------------------------------
 // ERASE LATER!!!
