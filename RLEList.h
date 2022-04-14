@@ -106,6 +106,15 @@ int RLEListSize(RLEList list);
 RLEListResult RLEListRemove(RLEList list, int index);
 
 
+
+/**
+*   RLEListCleanUp: Cleans up a node that has been emptied out
+*
+* @param prevNode - The node before the one that has just been emptied.
+*/
+void RLEListCleanUp(RLEList prevNode);
+
+
 /**
 *   RLEListGet: Returns the character found at a specified index in an RLE list.
 *

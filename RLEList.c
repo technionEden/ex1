@@ -46,6 +46,10 @@ int main() {
     RLEListRemove(myList,4);
     printRLEList(myList);
 
+    printf("Remove index==1\n");
+    RLEListRemove(myList,1);
+    printRLEList(myList);
+
     printRLEListFullData(myList);
 
     RLEListDestroy(myList);
@@ -143,19 +147,33 @@ RLEListResult RLEListRemove(RLEList list, int index)
     }
 
     RLEList ptr = list;
+    RLEList prev = list;
     int amountLetters = 0;
 
     while(amountLetters + ptr->amount < index && ptr) {
         amountLetters += ptr->amount;
+        prev=ptr;
         ptr = ptr->next;
     }
     ptr->amount = (ptr->amount) - 1;
-    // IF BECOMES 0 -> GET RID OF IT, IMPLEMENT!!!!!!!
+
+    if(ptr->amount == 0) {
+        printf("Cleaning out Node with letter %c\n", ptr->letter);
+        RLEListCleanUp(prev);
+    }
+
+
     return RLE_LIST_SUCCESS;
 
 }
 
-
+void RLEListCleanUp(RLEList prevNode)
+{
+    RLEList toDelete = prevNode->next;
+    RLEList newNext = toDelete->next;
+    prevNode->next = newNext;
+    free(toDelete);
+}
 
 
 // ----------------------------------------- FOR DEBUGGING !!! -----------------------------------------
