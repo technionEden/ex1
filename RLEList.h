@@ -149,4 +149,13 @@ char* RLEListExportToString(RLEList list, RLEListResult* result);
 RLEListResult RLEListMap(RLEList list, MapFunction map_function);
 
 
+
+
+// ----------------------------------------- FOR DEBUGGING !!! -----------------------------------------
+// ERASE LATER !!!
+void printRLEList(RLEList list);
+void printRLEListFullData(RLEList list);
+
+// -----------------------------------------------------------------------------------------------------
+
 #endif // HW1_RLELIST_H

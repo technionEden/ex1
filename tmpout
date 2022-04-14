@@ -1,0 +1,26 @@
+hello
+WWAAABBCC
+size: 9
+Remove index==5
+WWAABBCC
+Remove index==5
+WWAABCC
+Remove index==5
+WWAACC
+Append A
+WWAACCA
+Remove index==1
+WAACCA
+Append A
+WAACCAA
+Remove index==4
+WAACAA
+Full Info:
+HEAD amount: 0 (==0), letter: $ (==$)
+Amount: 0 Letter: $
+Amount: 1 Letter: W
+Amount: 2 Letter: A
+Amount: 0 Letter: B
+Amount: 1 Letter: C
+Amount: 2 Letter: A
+
