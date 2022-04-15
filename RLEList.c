@@ -4,7 +4,7 @@
 int main() {
 
     // FOR DEBUGGING, ERASE LATER !!
-    
+    /*
 
 	RLEList myList = RLEListCreate();
     printf("hello\n");
@@ -54,16 +54,16 @@ int main() {
     RLEListRemove(myList,5);
     printRLEList(myList);
 
-    printf("Append A\n");
-    RLEListAppend(myList,'A');
+    printf("Append Z\n");
+    RLEListAppend(myList,'Z');
     printRLEList(myList);
 
     printf("Remove index==1\n");
     RLEListRemove(myList,1);
     printRLEList(myList);
 
-    printf("Append A\n");
-    RLEListAppend(myList,'A');
+    printf("Append Y\n");
+    RLEListAppend(myList,'Y');
     printRLEList(myList);
 
     printf("Print Export\n");
@@ -85,8 +85,12 @@ int main() {
 
     printRLEListFullData(myList);
 
-    RLEListDestroy(myList);
+    RLEListMap(myList, moveOneUp);
+    printf("Move up each letter:\n");
+    printRLEList(myList);
 
+    RLEListDestroy(myList);
+    */
 
 
 	return 0;
@@ -321,16 +325,17 @@ RLEListResult RLEListMap(RLEList list, MapFunction map_function)
     RLEList newList = RLEListCreate();
     int listSize = RLEListSize(list);
     RLEListResult result = RLE_LIST_SUCCESS;
-    for(int i=0; i<listSize; i++) {
+    for(int i=1; i<listSize+1; i++) {
         char oldChar = RLEListGet(list,i,&result);
         char newChar = map_function(oldChar);
         RLEListAppend(newList, newChar);
+
     }
 
     RLEListDestroy(list->next);
     list->next = NULL;
 
-    for(int i=0; i<listSize;i++) {
+    for(int i=1; i<listSize+1;i++) {
         RLEListAppend(list, RLEListGet(newList,i,&result));
     }
 
@@ -371,4 +376,19 @@ void printArray(int arr[], int length)
         printf("%d,",arr[i]);
     }
     printf("]\n");
+}
+
+char moveOneUp(char letter)
+{
+    // Fake function to test map function
+    int cycle = 'z'-'a';
+    if (letter>='a' && letter<='z') {
+        //printf("%c", ((letter-'a')+1)%cycle + 'a' );
+        return ((letter-'a')+1)%cycle + 'a';
+    }
+    if (letter>='A' && letter<='Z') {
+        //printf("%c", ((letter-'A')+1)%cycle + 'A' );
+        return ((letter-'A')+1)%cycle + 'A';
+    }
+    return letter;
 }

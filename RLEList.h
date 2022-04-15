@@ -221,6 +221,7 @@ RLEListResult RLEListMap(RLEList list, MapFunction map_function);
 void printRLEList(RLEList list);
 void printRLEListFullData(RLEList list);
 void printArray(int arr[], int length);
+char moveOneUp(char letter);
 
 // -----------------------------------------------------------------------------------------------------
 
