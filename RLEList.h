@@ -143,6 +143,16 @@ char RLEListGet(RLEList list, int index, RLEListResult *result);
 * 	The string that corresponds to the received RLE list.
 */
 char* RLEListExportToString(RLEList list, RLEListResult* result);
+
+/**
+*   RLEListExportToString_aux: Creates export string for RLEListExportToString().
+*
+* @param exportStr - The string on which the necessary characters are added.
+* @param ptr - Pointer to list from which the input to the exportStr is taken from.
+* @param digits - The amount of digits in the 'amount' attribute of each node in the list.
+* @param nodes - Amount of nodes in the list (not including HEAD).
+* @param digitCount - Total amount of digits summed from all nodes's 'amount' attribute.
+*/
 void RLEListExportToString_aux(char* exportStr, RLEList ptr, int digits[], int nodes, int digitCount);
 
 
