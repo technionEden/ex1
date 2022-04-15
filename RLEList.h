@@ -143,6 +143,7 @@ char RLEListGet(RLEList list, int index, RLEListResult *result);
 * 	The string that corresponds to the received RLE list.
 */
 char* RLEListExportToString(RLEList list, RLEListResult* result);
+void RLEListExportToString_aux(char* exportStr, RLEList ptr, int digits[], int nodes, int digitCount);
 
 
 /**

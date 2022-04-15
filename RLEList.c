@@ -5,7 +5,7 @@ int main() {
 
     // FOR DEBUGGING, ERASE LATER !!
 
-    /*
+    
 
 	RLEList myList = RLEListCreate();
     printf("hello\n");
@@ -88,7 +88,7 @@ int main() {
 
     RLEListDestroy(myList);
 
-    */
+
 
 	return 0;
 }
@@ -250,7 +250,15 @@ char* RLEListExportToString(RLEList list, RLEListResult* result)
 
     char* exportStr = malloc(sizeof(char)*((nodes*2)+digitCount+1)); // MAKE SURE OUTSIDE THERE'S FREE()
 
-    RLEList ptr = list->next;
+    RLEListExportToString_aux(exportStr, list->next, digits, nodes, digitCount);
+
+    *result = RLE_LIST_SUCCESS;
+    free(digits);
+    return exportStr;
+}
+
+void RLEListExportToString_aux(char* exportStr, RLEList ptr, int digits[], int nodes, int digitCount)
+{
     int currIndex = 0;
     for(int i=0; i<nodes; i++) {
         exportStr[currIndex++]=ptr->letter;
@@ -263,9 +271,6 @@ char* RLEListExportToString(RLEList list, RLEListResult* result)
         ptr=ptr->next;
     }
     exportStr[(nodes*2)+digitCount] = '\0';
-    *result = RLE_LIST_SUCCESS;
-    free(digits);
-    return exportStr;
 }
 
 int countNodes(RLEList list)
