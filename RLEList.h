@@ -215,7 +215,7 @@ RLEListResult RLEListMap(RLEList list, MapFunction map_function);
 
 
 
-
+/*
 // ----------------------------------------- FOR DEBUGGING !!! -----------------------------------------
 // ERASE LATER !!!
 void printRLEList(RLEList list);
@@ -224,5 +224,5 @@ void printArray(int arr[], int length);
 char moveOneUp(char letter);
 
 // -----------------------------------------------------------------------------------------------------
-
+*/
 #endif // HW1_RLELIST_H
