@@ -30,8 +30,6 @@
 RLEList asciiArtRead(FILE* in_stream);
 
 
-
-
 /**
 * asciiArtPrint: Writes picture using RLEList into a file.
 *
