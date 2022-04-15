@@ -205,14 +205,14 @@ void printArray(int arr[], int length)
 char moveOneUp(char letter)
 {
     // Fake function to test map function
-    int cycle = 'z'-'a';
+    int cycle = 'z'-'a'+1;
     if (letter>='a' && letter<='z') {
         //printf("%c", ((letter-'a')+1)%cycle + 'a' );
-        return ((letter-'a')+1)%cycle + 'a';
+        return (letter+1-'a')%cycle + 'a';
     }
     if (letter>='A' && letter<='Z') {
         //printf("%c", ((letter-'A')+1)%cycle + 'A' );
-        return ((letter-'A')+1)%cycle + 'A';
+        return (letter+1-'A')%cycle + 'A';
     }
     return letter;
 }
