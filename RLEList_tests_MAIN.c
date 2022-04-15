@@ -11,12 +11,16 @@ void printRLEListFullData(RLEList list);
 void printArray(int arr[], int length);
 char moveOneUp(char letter);
 void test1();
+void test2();
+void test3();
 
 // MAKE SURE THAT WHEN YOU DO 'gcc ...' you don't add '-DNDEBUG'
 
 int main()
 {
     test1();
+    test2();
+    test3();
 
 
 	return 0;
@@ -121,6 +125,45 @@ void test1()
     RLEListDestroy(myList);
 }
 
+void test2()
+{
+    RLEList myList = RLEListCreate();
+
+    RLEListAppend(myList,'W');
+    printRLEList(myList);
+
+    assert(RLEListSize(myList) == 1);
+
+    printf("Remove index==1\n");
+    assert(RLEListRemove(myList,1) == RLE_LIST_SUCCESS);
+    printRLEList(myList);
+
+    assert(RLEListSize(myList) == 0);
+
+    printf("Remove index==1\n");
+    assert(RLEListRemove(myList,1) == RLE_LIST_INDEX_OUT_OF_BOUNDS);
+    printRLEList(myList);
+
+    printf("Append Y\n");
+    assert(RLEListAppend(myList,'Y') == RLE_LIST_SUCCESS);
+    printRLEList(myList);
+    printf("Append X\n");
+    assert(RLEListAppend(myList,'X') == RLE_LIST_SUCCESS);
+    printRLEList(myList);
+    printf("Append Z\n");
+    assert(RLEListAppend(myList,'Z') == RLE_LIST_SUCCESS);
+    printRLEList(myList);
+
+    RLEListDestroy(myList);
+}
+
+void test3()
+{
+    RLEListResult myResult = RLE_LIST_SUCCESS;
+    RLEList myList = NULL;
+    RLEListGet(myList,7,&myResult);
+    assert(myResult == RLE_LIST_NULL_ARGUMENT);
+}
 
 
 

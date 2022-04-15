@@ -82,6 +82,7 @@ int RLEListSize(RLEList list)
 RLEListResult RLEListRemove(RLEList list, int index)
 {
     if(!list) {
+        // BUGGY !! Is just a HEAD considered NULL or not?
         return RLE_LIST_NULL_ARGUMENT;
     }
     if(RLEListSize(list)<index || index<1) {
