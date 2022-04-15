@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include "RLEList.h"
+#include "RLEList.c"
 
 /**
 * Ascii Art Tool
@@ -54,3 +56,6 @@ RLEListResult asciiArtPrint(RLEList list, FILE *out_stream);
 * 	RLE_LIST_SUCCESS we have written onto out_stream successfully.
 */
 RLEListResult asciiArtPrintEncoded(RLEList list, FILE *out_stream);
+
+
+#endif // HW1_ASCIIARTTOOL_H

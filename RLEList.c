@@ -7,7 +7,6 @@ struct RLEList_t{
     struct RLEList_t* next;
 };
 
-//implement the functions here
 
 RLEList RLEListCreate()
 {
@@ -218,7 +217,6 @@ int calcPow(int a, int b)
 }
 
 
-// NEED TO CHECK THIS !!!
 RLEListResult RLEListMap(RLEList list, MapFunction map_function)
 {
     if (!list || !map_function) {
