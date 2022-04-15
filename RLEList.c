@@ -1,8 +1,6 @@
 #include "RLEList.h"
 
 
-
-
 struct RLEList_t{
     int amount;
     char letter;
@@ -86,7 +84,7 @@ RLEListResult RLEListRemove(RLEList list, int index)
     if(!list) {
         return RLE_LIST_NULL_ARGUMENT;
     }
-    if(RLEListSize(list)<index) {
+    if(RLEListSize(list)<index || index<1) {
         return RLE_LIST_INDEX_OUT_OF_BOUNDS;
     }
 

@@ -1,5 +1,8 @@
 #include "RLEList.h"
 #include "RLEList.c"
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
 #include <assert.h>
 
 
@@ -9,15 +12,11 @@ void printArray(int arr[], int length);
 char moveOneUp(char letter);
 void test1();
 
+// MAKE SURE THAT WHEN YOU DO 'gcc ...' you don't add '-DNDEBUG'
 
-int main() {
-
-    // FOR DEBUGGING, ERASE LATER !!
+int main()
+{
     test1();
-
-
-
-
 
 
 	return 0;
@@ -50,30 +49,30 @@ void test1()
 
 
     printRLEList(myList);
-    printf("size: %d\n",RLEListSize(myList));
+    assert(RLEListSize(myList) == 18);
 
     RLEListResult myResult = RLE_LIST_SUCCESS;
 
-    printf("Letter at index 7\n");
-    printf("Letter: %c\n",RLEListGet(myList,7,&myResult));
+    assert(RLEListGet(myList,7,&myResult) == 'B');
+    assert(myResult == RLE_LIST_SUCCESS);
 
-    printf("Letter at index 10\n");
-    char let = RLEListGet(myList,10,&myResult);
-    printf("Letter: %c Result: %i\n",let,myResult);
+
+    assert(RLEListGet(myList,10,&myResult) == 'C');
+    assert(myResult == RLE_LIST_SUCCESS);
 
     printf("Remove index==5\n");
-    RLEListRemove(myList,5);
+    assert(RLEListRemove(myList,5) == RLE_LIST_SUCCESS);
     printRLEList(myList);
 
-    printf("Letter at index 7\n");
-    printf("Letter: %c\n",RLEListGet(myList,7,&myResult));
+    assert(RLEListGet(myList,7,&myResult) == 'C');
+    assert(myResult == RLE_LIST_SUCCESS);
 
     printf("Remove index==5\n");
-    RLEListRemove(myList,5);
+    assert(RLEListRemove(myList,5) == RLE_LIST_SUCCESS);
     printRLEList(myList);
 
     printf("Remove index==5\n");
-    RLEListRemove(myList,5);
+    assert(RLEListRemove(myList,5) == RLE_LIST_SUCCESS);
     printRLEList(myList);
 
     printf("Append Z\n");
@@ -81,35 +80,43 @@ void test1()
     printRLEList(myList);
 
     printf("Remove index==1\n");
-    RLEListRemove(myList,1);
+    assert(RLEListRemove(myList,1) == RLE_LIST_SUCCESS);
+    printRLEList(myList);
+
+    assert(RLEListRemove(myList,0) == RLE_LIST_INDEX_OUT_OF_BOUNDS);
     printRLEList(myList);
 
     printf("Append Y\n");
-    RLEListAppend(myList,'Y');
+    assert(RLEListAppend(myList,'Y') == RLE_LIST_SUCCESS);
     printRLEList(myList);
 
     printf("Print Export\n");
     char * myExport = RLEListExportToString(myList, &myResult);
-    printf("Export: \n%s Message: %d\n",myExport, myResult);
+    printf("Export: \n%s",myExport);
+    assert(myResult == RLE_LIST_SUCCESS);
     free(myExport);
 
-    printf("Remove index==4\n");
-    RLEListRemove(myList,4);
-    printRLEList(myList);
-
     printf("Remove index==1\n");
-    RLEListRemove(myList,1);
+    assert(RLEListRemove(myList,1) == RLE_LIST_SUCCESS);
     printRLEList(myList);
 
-    printf("Letter at index 1\n");
-    printf("Letter: %c\n",RLEListGet(myList,1,&myResult));
 
+    assert(RLEListGet(myList,1,&myResult) == 'A');
+    assert(myResult == RLE_LIST_SUCCESS);
 
     printRLEListFullData(myList);
 
     RLEListMap(myList, moveOneUp);
     printf("Move up each letter:\n");
     printRLEList(myList);
+
+    printf("New Export\n");
+    char * myNewExport = RLEListExportToString(myList, &myResult);
+    printf("Export: \n%s",myNewExport);
+    assert(myResult == RLE_LIST_SUCCESS);
+    free(myNewExport);
+
+    printRLEListFullData(myList);
 
     RLEListDestroy(myList);
 }
@@ -166,3 +173,5 @@ char moveOneUp(char letter)
     }
     return letter;
 }
+
+
