@@ -82,6 +82,17 @@ void RLEListDestroy(RLEList list);
 */
 RLEListResult RLEListAppend(RLEList list, char value);
 
+/**
+*   RLEListAppend_aux: Adds value to list.
+*
+* @param finalPtr - The final node in the list.
+* @param value - The character which needs to be added.
+* @return
+* 	RLE_LIST_OUT_OF_MEMORY if an allocation failed
+* 	RLE_LIST_SUCCESS if the character has been inserted successfully
+*/
+RLEListResult RLEListAppend_aux(RLEList finalPtr, char value);
+
 
 /**
 * RLEListSize: Returns the total number of characters in an RLE list.

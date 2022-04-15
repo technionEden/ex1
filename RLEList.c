@@ -4,7 +4,6 @@
 int main() {
 
     // FOR DEBUGGING, ERASE LATER !!
-
     
 
 	RLEList myList = RLEListCreate();
@@ -38,7 +37,7 @@ int main() {
 
     printf("Letter at index 10\n");
     char let = RLEListGet(myList,10,&myResult);
-    printf("Letter: %d Result: %i\n",let,myResult);
+    printf("Letter: %c Result: %i\n",let,myResult);
 
     printf("Remove index==5\n");
     RLEListRemove(myList,5);
@@ -136,25 +135,26 @@ RLEListResult RLEListAppend(RLEList list, char value)
         ptr = ptr->next;
     }
 
-    // SAME CHAR AS CURRENT NODE
+    return RLEListAppend_aux(ptr, value);
 
-    if (ptr->letter == value) {
-        ptr->amount = ptr->amount+1;
+}
+
+RLEListResult RLEListAppend_aux(RLEList finalPtr, char value)
+{
+    if (finalPtr->letter == value) {
+        finalPtr->amount = finalPtr->amount+1;
     }
-    // DIFFERENT CHAR FROM CURRENT NODE
-    
+
     else {
         RLEList newNode = RLEListCreate();
         if (!newNode){
             return RLE_LIST_OUT_OF_MEMORY;
         }
-        ptr->next = newNode;
+        finalPtr->next = newNode;
         newNode->amount = 1;
         newNode->letter = value;
     }
-
     return RLE_LIST_SUCCESS;
-
 }
 
 
