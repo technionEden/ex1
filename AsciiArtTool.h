@@ -7,6 +7,17 @@
 #include "RLEList.h"
 #include "RLEList.c"
 
+
+// RECEIVE THREE MANDATORY ARGUMENTS for main()
+// - flag:
+//          -e : Write picture into target in encoded form
+//          -i : Write picture in inverted form.
+// - source:
+//          Input file containing ASCII ART
+// - target:
+//          Output file onto which we want to write the result (compressed input or inverted)
+
+
 /**
 * Ascii Art Tool
 *
@@ -42,6 +53,15 @@ RLEList asciiArtRead(FILE* in_stream);
 RLEListResult asciiArtPrint(RLEList list, FILE *out_stream);
 
 
+/**
+* asciiInvertCharacter: Inverts characters per guidelines.
+* Guidelines: [space] -> @ , @ -> [space], [other char] -> [stays the same]
+*
+* @param value - Ascii value that needs to be inverted.
+* @return
+* 	Inverted ascii value.
+*/
+char asciiInvertCharacter(char value);
 
 
 /**

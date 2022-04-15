@@ -1,4 +1,3 @@
-
 #include "AsciiArtTool.h"
 
 
@@ -6,7 +5,7 @@ RLEList asciiArtRead(FILE* in_stream)
 {
     RLEList asciiList = RLEListCreate();
 
-    if (in_stream == NULL){
+    if (!in_stream){
         return NULL; //could not open file
     }
 
@@ -29,13 +28,7 @@ RLEListResult asciiArtPrint(RLEList list, FILE *out_stream)
     RLEList ptr = list;
     while(ptr) {
         for(int i=0; i< ptr->amount ;i++) {
-            if(ptr->letter == ' '){
-                fputc ('@', out_stream);
-            } else if(ptr->letter == '@'){
-                fputc (' ', out_stream);
-            } else {
-               fputc (ptr->letter, out_stream);
-            }
+            fputc (ptr->letter, out_stream);
         }
         ptr = ptr->next;
     }
@@ -65,3 +58,14 @@ RLEListResult asciiArtPrintEncoded(RLEList list, FILE *out_stream)
     return result;
 }
 
+
+char asciiInvertCharacter(char value)
+{
+    if(value == ' ') {
+        return '@';
+    }
+    if(value == '@') {
+        return ' ';
+    }
+    return value;
+}

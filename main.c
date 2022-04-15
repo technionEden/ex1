@@ -8,24 +8,14 @@
 
 int checkMainInput(int argc, char **argv);
 
-// RECEIVE THREE MANDATORY ARGUMENTS
-// - flag:
-//          -e : Write picture into target in encoded form
-//          -i : Write picture in inverted form. [space] -> @ , @ -> [space], [other char] -> 'stays the same'
-// - source:
-//          Input file containing ASCII ART
-// - target:
-//          Output file onto which we want to write the result (compressed input or inverted)
 
-
-// ./output -e dog.txt output.txt
 int main(int argc, char **argv)
 {
     
     if (!checkMainInput(argc,argv)) {
+        // What type of return am i supposed to put here?
         return 0;
     }
-
 
     // READ
     FILE *readFile;
@@ -33,20 +23,21 @@ int main(int argc, char **argv)
     RLEList asciiList = asciiArtRead(readFile);
 
     // WRITE
-
+    RLEListResult result = RLE_LIST_SUCCESS;
     if(!strcmp(argv[1],"-e")) {
         // WRITE - ENCODED
         FILE *writeFile = fopen(argv[3], "w");
-        asciiArtPrintEncoded(asciiList, writeFile);
+        result = asciiArtPrintEncoded(asciiList, writeFile);
         fclose(writeFile);
     } else {
         // WRITE - INVERTED
         FILE *appendFile = fopen(argv[3], "a");
-        asciiArtPrint(asciiList, appendFile);
+        result = RLEListMap(asciiList, asciiInvertCharacter);
+        if (result == RLE_LIST_SUCCESS) {
+            result = asciiArtPrint(asciiList, appendFile);
+        }
         fclose(appendFile);
     }
-
-
 
 
     // CLOSE/FREE
@@ -54,8 +45,7 @@ int main(int argc, char **argv)
     fclose(readFile);
     RLEListDestroy(asciiList);
     
-
-    return 0;
+    return result;
     
 }
 
