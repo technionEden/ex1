@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "RLEList.h"
-#include "AsciiArtTool.h"
 #include "AsciiArtTool.c"
 
 int checkMainInput(int argc, char **argv);

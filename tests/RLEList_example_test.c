@@ -4,13 +4,15 @@
 
 #include "RLEList.h"
 #include "test_utilities.h"
+// My addtion
+#include "RLEList.c"
 
 typedef bool (*testFunc)(void);
 
 bool basicTest();
 
-#define TESTS_NAMES             \
-    X(basicTest)               \
+#define TESTS_NAMES
+    X(basicTest)
 
 testFunc tests[] = {
 #define X(name) name,
