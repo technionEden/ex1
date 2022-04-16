@@ -5,15 +5,19 @@ RLEList asciiArtRead(FILE* in_stream)
 {
     RLEList asciiList = RLEListCreate();
 
-    if (!in_stream){
+    if (!in_stream || !asciiList){
         return NULL; //could not open file
     }
 
     char tmpChar;
-    while ((tmpChar = fgetc(in_stream)) != EOF) {
-        RLEListAppend(asciiList, tmpChar);
+    RLEListResult result = RLE_LIST_SUCCESS;
+    while ((tmpChar = fgetc(in_stream)) != EOF && result == RLE_LIST_SUCCESS) {
+        result = RLEListAppend(asciiList, tmpChar);
      }
 
+    if (result!=RLE_LIST_SUCCESS){
+        return NULL;
+    }
 
     return asciiList;
 
@@ -43,17 +47,11 @@ RLEListResult asciiArtPrintEncoded(RLEList list, FILE *out_stream)
     }
     RLEListResult result;
     char * encoded = RLEListExportToString(list,&result);
-    if (result != RLE_LIST_SUCCESS) {
+    if (result != RLE_LIST_SUCCESS || !encoded) {
+        free(encoded);
         return result;
     }
-    int writeResult = fputs(RLEListExportToString(list,&result), out_stream);
-    if (result != RLE_LIST_SUCCESS) {
-        return result;
-    }
-    if (writeResult == EOF) {
-        // CHECK what happens for empty list
-        return RLE_LIST_ERROR;
-    }
+    int writeResult = fputs(encoded, out_stream);
     free(encoded);
     return result;
 }

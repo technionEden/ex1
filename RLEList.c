@@ -12,6 +12,7 @@ RLEList RLEListCreate()
 {
     RLEList ptr = malloc(sizeof(*ptr));
 	if(!ptr) {
+        free(ptr);
 		return NULL;
 	}
 	ptr->amount = 0;
@@ -123,7 +124,7 @@ char RLEListGet(RLEList list, int index, RLEListResult *result)
         *result =  RLE_LIST_NULL_ARGUMENT;
         return 0;
     }
-    if(RLEListSize(list)<index) {
+    if(RLEListSize(list)<index || index<1) {
         *result =  RLE_LIST_INDEX_OUT_OF_BOUNDS;
         return 0;
     }
@@ -219,28 +220,30 @@ int calcPow(int a, int b)
 
 RLEListResult RLEListMap(RLEList list, MapFunction map_function)
 {
+    // TODO: check for character turnt to NULL (update inverCharacter to return null)
     if (!list || !map_function) {
         return RLE_LIST_NULL_ARGUMENT;
     }
-
     RLEList newList = RLEListCreate();
     int listSize = RLEListSize(list);
+    if (listSize<0){
+       return RLE_LIST_NULL_ARGUMENT;
+    }
     RLEListResult result = RLE_LIST_SUCCESS;
-    for(int i=1; i<listSize+1; i++) {
+    for(int i=1; i<listSize+1 && result==RLE_LIST_SUCCESS; i++) {
         char oldChar = RLEListGet(list,i,&result);
         char newChar = map_function(oldChar);
-        RLEListAppend(newList, newChar);
-
+        result = RLEListAppend(newList, newChar);
     }
 
     RLEListDestroy(list->next);
     list->next = NULL;
 
-    for(int i=1; i<listSize+1;i++) {
-        RLEListAppend(list, RLEListGet(newList,i,&result));
+    for(int i=1; i<listSize+1 && result==RLE_LIST_SUCCESS;i++) {
+        result = RLEListAppend(list, RLEListGet(newList,i,&result));
     }
 
-    return RLE_LIST_SUCCESS;
+    return result;
 }
 
 int getNodeAmount(RLEList ptr)
