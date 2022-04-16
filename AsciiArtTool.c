@@ -27,10 +27,10 @@ RLEListResult asciiArtPrint(RLEList list, FILE *out_stream)
     }
     RLEList ptr = list;
     while(ptr) {
-        for(int i=0; i< ptr->amount ;i++) {
-            fputc (ptr->letter, out_stream);
+        for(int i=0; i< getNodeAmount(ptr) ;i++) {
+            fputc (getNodeLetter(ptr), out_stream);
         }
-        ptr = ptr->next;
+        ptr =  getNodeNext(ptr);
     }
     return RLE_LIST_SUCCESS;
 }

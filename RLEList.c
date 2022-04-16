@@ -243,4 +243,22 @@ RLEListResult RLEListMap(RLEList list, MapFunction map_function)
     return RLE_LIST_SUCCESS;
 }
 
+int getNodeAmount(RLEList ptr)
+{
+    int ptrAmount = ptr->amount;
+    return ptrAmount;
+}
+
+char getNodeLetter(RLEList ptr)
+{
+    char ptrLetter = ptr->letter;
+    return ptrLetter;
+}
+
+RLEList getNodeNext(RLEList ptr)
+{
+    RLEList ptrNext = ptr->next;
+    return ptrNext;
+}
+
 

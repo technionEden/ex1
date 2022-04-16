@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "AsciiArtTool.c"
+#include "AsciiArtTool.h"
 
 int checkMainInput(int argc, char **argv);
 
