@@ -33,7 +33,7 @@ int main(int argc, char **argv)
         }
         fclose(appendFile);
     }
-    
+
     // CLOSE/FREE
 
     fclose(readFile);
