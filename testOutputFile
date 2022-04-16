@@ -1,0 +1,83 @@
+WWAAABBCCCCCCCCCCC
+Remove index==5
+WWAAABCCCCCCCCCCC
+Remove index==5
+WWAAACCCCCCCCCCC
+Remove index==5
+WWAAACCCCCCCCCC
+Append Z
+WWAAACCCCCCCCCCZ
+Remove index==0
+WAAACCCCCCCCCCZ
+Remove index==0
+AAACCCCCCCCCCZ
+Append Y
+AAACCCCCCCCCCZY
+Print Export
+Export: 
+A3
+C10
+Z1
+Y1
+Remove index==1
+AACCCCCCCCCCZY
+Full Info:
+HEAD amount: 0 (==0), letter: $ (==$)
+Amount: 0 Letter: $
+Amount: 2 Letter: A
+Amount: 10 Letter: C
+Amount: 1 Letter: Z
+Amount: 1 Letter: Y
+
+Move up each letter:
+BBDDDDDDDDDDAZ
+New Export
+Export: 
+B2
+D10
+A1
+Z1
+Full Info:
+HEAD amount: 0 (==0), letter: $ (==$)
+Amount: 0 Letter: $
+Amount: 2 Letter: B
+Amount: 10 Letter: D
+Amount: 1 Letter: A
+Amount: 1 Letter: Z
+
+W
+Remove index==1
+W
+list size 1
+Remove index==0
+
+Append Y
+Y
+Append X
+YX
+Append Z
+YXZ
+TEST 4 
+AWAAABAAACCBCBC
+Get index==0
+A
+Get index==1
+W
+Get index==2
+A
+Remove index==1
+AAAABAAACCBCBC
+Remove index==0
+AAABAAACCBCBC
+Remove index==11
+AAABAAACCBCC
+Full Info:
+HEAD amount: 0 (==0), letter: $ (==$)
+Amount: 0 Letter: $
+Amount: 3 Letter: A
+Amount: 1 Letter: B
+Amount: 3 Letter: A
+Amount: 2 Letter: C
+Amount: 1 Letter: B
+Amount: 2 Letter: C
+

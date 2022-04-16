@@ -85,15 +85,15 @@ RLEListResult RLEListRemove(RLEList list, int index)
         // BUGGY !! Is just a HEAD considered NULL or not?
         return RLE_LIST_NULL_ARGUMENT;
     }
-    if(RLEListSize(list)<index || index<1) {
+    if(RLEListSize(list)-1<index || index<0) {
         return RLE_LIST_INDEX_OUT_OF_BOUNDS;
     }
 
-    RLEList ptr = list;
+    RLEList ptr = list->next;
     RLEList prev = list;
     int amountLetters = 0;
 
-    while(amountLetters + ptr->amount < index && ptr) {
+    while(ptr && amountLetters + ptr->amount <= index ) {
         amountLetters += ptr->amount;
         prev=ptr;
         ptr = ptr->next;
@@ -115,6 +115,12 @@ void RLEListCleanUp(RLEList prevNode)
     RLEList newNext = toDelete->next;
     prevNode->next = newNext;
     free(toDelete);
+    if(newNext && prevNode->letter == newNext->letter) {
+        prevNode->amount = prevNode->amount + newNext->amount;
+        RLEList newerNext = newNext->next;
+        prevNode->next = newerNext;
+        free(newNext);
+    }
 }
 
 
@@ -124,14 +130,14 @@ char RLEListGet(RLEList list, int index, RLEListResult *result)
         *result =  RLE_LIST_NULL_ARGUMENT;
         return 0;
     }
-    if(RLEListSize(list)<index || index<1) {
+    if(RLEListSize(list)<index || index<0) {
         *result =  RLE_LIST_INDEX_OUT_OF_BOUNDS;
         return 0;
     }
 
     RLEList ptr = list;
     int amountLetters = 0;
-    while(amountLetters + ptr->amount < index && ptr) {
+    while(amountLetters + ptr->amount <= index  && ptr) {
         amountLetters += ptr->amount;
         ptr = ptr->next;
     }
@@ -230,7 +236,7 @@ RLEListResult RLEListMap(RLEList list, MapFunction map_function)
        return RLE_LIST_NULL_ARGUMENT;
     }
     RLEListResult result = RLE_LIST_SUCCESS;
-    for(int i=1; i<listSize+1 && result==RLE_LIST_SUCCESS; i++) {
+    for(int i=0; i<listSize && result==RLE_LIST_SUCCESS; i++) {
         char oldChar = RLEListGet(list,i,&result);
         char newChar = map_function(oldChar);
         result = RLEListAppend(newList, newChar);
@@ -239,7 +245,7 @@ RLEListResult RLEListMap(RLEList list, MapFunction map_function)
     RLEListDestroy(list->next);
     list->next = NULL;
 
-    for(int i=1; i<listSize+1 && result==RLE_LIST_SUCCESS;i++) {
+    for(int i=0; i<listSize && result==RLE_LIST_SUCCESS;i++) {
         result = RLEListAppend(list, RLEListGet(newList,i,&result));
     }
 
