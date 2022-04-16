@@ -9,7 +9,7 @@ int checkMainInput(int argc, char **argv);
 
 int main(int argc, char **argv)
 {
-    
+
     if (!checkMainInput(argc,argv)) {
         // What type of return am i supposed to put here?
         return 0;
@@ -19,7 +19,7 @@ int main(int argc, char **argv)
     FILE *readFile;
     readFile = fopen(argv[2], "r");
     RLEList asciiList = asciiArtRead(readFile);
-
+    
     // WRITE
     RLEListResult result = RLE_LIST_SUCCESS;
     if(!strcmp(argv[1],"-e")) {
@@ -44,7 +44,7 @@ int main(int argc, char **argv)
     RLEListDestroy(asciiList);
     
     return result;
-    
+
 }
 
 int checkMainInput(int argc, char **argv)
@@ -62,6 +62,7 @@ int checkMainInput(int argc, char **argv)
         printf("Not appropriate flag\n");
         return 0;
     }
-    // TODO: check other arguments too
+    // TODO: check other arguments too!!!
+    // IF they give wrong input file name then you get segmentation fault!
     return 1;
 }
