@@ -26,7 +26,7 @@
 */
 
 
-/** 
+/**
 * Typedef for defining the RLE list.
 * Complete the implementation of struct RLEList_t defined in RLEList.c
 */
@@ -42,7 +42,7 @@ typedef enum {
 } RLEListResult;
 
 
-/** 
+/**
  * Type of function for mapping characters.
  * This function should accept a character in the list and return the mapped character
  */
@@ -119,7 +119,7 @@ RLEListResult RLEListRemove(RLEList list, int index);
 * 	LIST_SUCCESS the character found at index has been retrieved successfully.
 * @return
 * 	0 if result is not RLE_LIST_SUCCESS.
-* 	The character found at given index in case of success.   
+* 	The character found at given index in case of success.
 */
 char RLEListGet(RLEList list, int index, RLEListResult *result);
 
@@ -145,7 +145,7 @@ char* RLEListExportToString(RLEList list, RLEListResult* result);
 *               This function replaces each character of the give RLE list with its mapped character.
 *
 * @param list - The RLE list to edit.
-* @param MapFunction - Pointer to a function of type MapFunction. 
+* @param MapFunction - Pointer to a function of type MapFunction.
 * @return
 * 	RLE_LIST_NULL_ARGUMENT if a NULL was sent as a paramater.
 * 	LIST_SUCCESS if the mapping is done successfully.
