@@ -1,4 +1,6 @@
 #include "RLEList.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 /**
 *   RLEListAppend_aux: Adds value to list.
