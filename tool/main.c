@@ -21,6 +21,7 @@ int main(int argc, char **argv)
     readFile = fopen(argv[2], "r");
     RLEList asciiList = asciiArtRead(readFile);
     if (!asciiList) {
+        RLEListDestroy(asciiList);
         return RLE_LIST_NULL_ARGUMENT;
     }
     
@@ -43,9 +44,9 @@ int main(int argc, char **argv)
     }
 
     // CLOSE/FREE
-
-    fclose(readFile);
     RLEListDestroy(asciiList);
+    fclose(readFile);
+
     
     return result;
 

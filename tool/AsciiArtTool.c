@@ -6,6 +6,7 @@ RLEList asciiArtRead(FILE* in_stream)
     RLEList asciiList = RLEListCreate();
 
     if (!in_stream || !asciiList){
+        RLEListDestroy(asciiList);
         return NULL; //could not open file
     }
 
@@ -16,6 +17,7 @@ RLEList asciiArtRead(FILE* in_stream)
      }
 
     if (result!=RLE_LIST_SUCCESS){
+        RLEListDestroy(asciiList);
         return NULL;
     }
 
