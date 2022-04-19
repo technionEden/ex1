@@ -153,18 +153,6 @@ char* RLEListExportToString(RLEList list, RLEListResult* result);
 RLEListResult RLEListMap(RLEList list, MapFunction map_function);
 
 
-// TODO!!!!!!!!! CANT KEEP THESE! Need something to change!
-
-/**
-*   get[Attribute]: Get attribute of node.
-*
-* @param ptr - Pointer to node in the RLEList.
-* @return
-* 	Attribute requested of node.
-*/
-int getNodeAmount(RLEList ptr);
-char getNodeLetter(RLEList ptr);
-RLEList getNodeNext(RLEList ptr);
 
 
 #endif // HW1_RLELIST_H

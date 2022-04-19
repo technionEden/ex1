@@ -1,8 +1,6 @@
 #include "AsciiArtTool.h"
 
 
-
-
 RLEList asciiArtRead(FILE* in_stream)
 {
     RLEList asciiList = RLEListCreate();
@@ -32,13 +30,15 @@ RLEListResult asciiArtPrint(RLEList list, FILE *out_stream)
         return RLE_LIST_NULL_ARGUMENT;
     }
     RLEList ptr = list;
-    while(ptr) {
-        for(int i=0; i< getNodeAmount(ptr) ;i++) {
-            fputc (getNodeLetter(ptr), out_stream);
+    int listSize = RLEListSize(list);
+    RLEListResult result = RLE_LIST_SUCCESS;
+    for(int i=0; i<listSize && result==RLE_LIST_SUCCESS; i++) {
+        char letter = RLEListGet(list, i, &result);
+        if(result == RLE_LIST_SUCCESS){
+            fputc (letter, out_stream);
         }
-        ptr =  getNodeNext(ptr);
     }
-    return RLE_LIST_SUCCESS;
+    return result;
 }
 
 

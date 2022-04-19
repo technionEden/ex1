@@ -61,6 +61,10 @@ static int countDigits(RLEList list, int arr[]);
 */
 static int calcPow(int a, int b);
 
+
+
+
+
 struct RLEList_t{
     int amount;
     char letter;
@@ -312,22 +316,5 @@ RLEListResult RLEListMap(RLEList list, MapFunction map_function)
     return result;
 }
 
-int getNodeAmount(RLEList ptr)
-{
-    int ptrAmount = ptr->amount;
-    return ptrAmount;
-}
-
-char getNodeLetter(RLEList ptr)
-{
-    char ptrLetter = ptr->letter;
-    return ptrLetter;
-}
-
-RLEList getNodeNext(RLEList ptr)
-{
-    RLEList ptrNext = ptr->next;
-    return ptrNext;
-}
 
 
