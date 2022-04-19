@@ -3,7 +3,15 @@
 #include <string.h>
 
 #include "AsciiArtTool.h"
-
+/**
+* asciiInvertCharacter: Inverts characters per guidelines.
+* Guidelines: [space] -> @ , @ -> [space], [other char] -> [stays the same]
+*
+* @param value - Ascii value that needs to be inverted.
+* @return
+* 	Inverted ascii value.
+*/
+static char asciiInvertCharacter(char value);
 
 
 int main(int argc, char **argv)
@@ -41,4 +49,15 @@ int main(int argc, char **argv)
     
     return result;
 
+}
+
+static char asciiInvertCharacter(char value)
+{
+    if(value == ' ') {
+        return '@';
+    }
+    if(value == '@') {
+        return ' ';
+    }
+    return value;
 }

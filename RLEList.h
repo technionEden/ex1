@@ -82,16 +82,7 @@ void RLEListDestroy(RLEList list);
 */
 RLEListResult RLEListAppend(RLEList list, char value);
 
-/**
-*   RLEListAppend_aux: Adds value to list.
-*
-* @param finalPtr - The final node in the list.
-* @param value - The character which needs to be added.
-* @return
-* 	RLE_LIST_OUT_OF_MEMORY if an allocation failed
-* 	RLE_LIST_SUCCESS if the character has been inserted successfully
-*/
-RLEListResult RLEListAppend_aux(RLEList finalPtr, char value);
+
 
 
 /**
@@ -115,15 +106,6 @@ int RLEListSize(RLEList list);
 * 	RLE_LIST_SUCCESS the character found at index has been removed successfully.
 */
 RLEListResult RLEListRemove(RLEList list, int index);
-
-
-
-/**
-*   RLEListCleanUp: Cleans up a node that has been emptied out
-*
-* @param prevNode - The node before the one that has just been emptied.
-*/
-void RLEListCleanUp(RLEList prevNode);
 
 
 /**
@@ -155,48 +137,7 @@ char RLEListGet(RLEList list, int index, RLEListResult *result);
 */
 char* RLEListExportToString(RLEList list, RLEListResult* result);
 
-/**
-*   RLEListExportToString_aux: Creates export string for RLEListExportToString().
-*
-* @param exportStr - The string on which the necessary characters are added.
-* @param ptr - Pointer to list from which the input to the exportStr is taken from.
-* @param digits - The amount of digits in the 'amount' attribute of each node in the list.
-* @param nodes - Amount of nodes in the list (not including HEAD).
-* @param digitCount - Total amount of digits summed from all nodes's 'amount' attribute.
-*/
-void RLEListExportToString_aux(char* exportStr, RLEList ptr, int digits[], int nodes, int digitCount);
 
-
-/**
-*   countNodes: Returns the amount of nodes in list.
-*
-* @param list - The RLE list whose nodes we count.
-* @return
-* 	Amount of nodes.
-*/
-int countNodes(RLEList list);
-
-/**
-*   countDigits: Counts the amount of digits of the amount attribute of each node.
-*
-* @param list - The RLE list whose quantity of digits in 'amount' attribute we count.
-* @param arr - The array were we fill the amount of digits in the 'amount' attribute of the node.
- *              Each index corresponds to the appropriate node from the list.
-* @return
-* 	Total amount of digits counted summed from the 'amount' attribute of all the nodes in the list.
-*/
-int countDigits(RLEList list, int arr[]);
-
-
-/**
-*   calcPow: Calculates a^b;
-*
-* @param a - The base.
-* @param b - The exponent.
-* @return
-* 	a^b
-*/
-int calcPow(int a, int b);
 
 
 /**
@@ -211,6 +152,8 @@ int calcPow(int a, int b);
 */
 RLEListResult RLEListMap(RLEList list, MapFunction map_function);
 
+
+// TODO!!!!!!!!! CANT KEEP THESE! Need something to change!
 
 /**
 *   get[Attribute]: Get attribute of node.

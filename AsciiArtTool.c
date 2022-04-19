@@ -1,6 +1,8 @@
 #include "AsciiArtTool.h"
 
 
+
+
 RLEList asciiArtRead(FILE* in_stream)
 {
     RLEList asciiList = RLEListCreate();
@@ -57,13 +59,4 @@ RLEListResult asciiArtPrintEncoded(RLEList list, FILE *out_stream)
 }
 
 
-char asciiInvertCharacter(char value)
-{
-    if(value == ' ') {
-        return '@';
-    }
-    if(value == '@') {
-        return ' ';
-    }
-    return value;
-}
+

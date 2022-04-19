@@ -1,5 +1,65 @@
 #include "RLEList.h"
 
+/**
+*   RLEListAppend_aux: Adds value to list.
+*
+* @param finalPtr - The final node in the list.
+* @param value - The character which needs to be added.
+* @return
+* 	RLE_LIST_OUT_OF_MEMORY if an allocation failed
+* 	RLE_LIST_SUCCESS if the character has been inserted successfully
+*/
+static RLEListResult RLEListAppend_aux(RLEList finalPtr, char value);
+
+/**
+*   RLEListCleanUp: Cleans up a node that has been emptied out
+*
+* @param prevNode - The node before the one that has just been emptied.
+*/
+static void RLEListCleanUp(RLEList prevNode);
+
+/**
+*   RLEListExportToString_aux: Creates export string for RLEListExportToString().
+*
+* @param exportStr - The string on which the necessary characters are added.
+* @param ptr - Pointer to list from which the input to the exportStr is taken from.
+* @param digits - The amount of digits in the 'amount' attribute of each node in the list.
+* @param nodes - Amount of nodes in the list (not including HEAD).
+* @param digitCount - Total amount of digits summed from all nodes's 'amount' attribute.
+*/
+static void RLEListExportToString_aux(char* exportStr, RLEList ptr, int digits[], int nodes, int digitCount);
+
+
+/**
+*   countNodes: Returns the amount of nodes in list.
+*
+* @param list - The RLE list whose nodes we count.
+* @return
+* 	Amount of nodes.
+*/
+static int countNodes(RLEList list);
+
+/**
+*   countDigits: Counts the amount of digits of the amount attribute of each node.
+*
+* @param list - The RLE list whose quantity of digits in 'amount' attribute we count.
+* @param arr - The array were we fill the amount of digits in the 'amount' attribute of the node.
+ *              Each index corresponds to the appropriate node from the list.
+* @return
+* 	Total amount of digits counted summed from the 'amount' attribute of all the nodes in the list.
+*/
+static int countDigits(RLEList list, int arr[]);
+
+
+/**
+*   calcPow: Calculates a^b;
+*
+* @param a - The base.
+* @param b - The exponent.
+* @return
+* 	a^b
+*/
+static int calcPow(int a, int b);
 
 struct RLEList_t{
     int amount;
@@ -45,7 +105,7 @@ RLEListResult RLEListAppend(RLEList list, char value)
 
 }
 
-RLEListResult RLEListAppend_aux(RLEList finalPtr, char value)
+static RLEListResult RLEListAppend_aux(RLEList finalPtr, char value)
 {
     if (finalPtr->letter == value) {
         finalPtr->amount = finalPtr->amount+1;
@@ -109,7 +169,7 @@ RLEListResult RLEListRemove(RLEList list, int index)
 
 }
 
-void RLEListCleanUp(RLEList prevNode)
+static void RLEListCleanUp(RLEList prevNode)
 {
     RLEList toDelete = prevNode->next;
     RLEList newNext = toDelete->next;
@@ -170,7 +230,7 @@ char* RLEListExportToString(RLEList list, RLEListResult* result)
     return exportStr;
 }
 
-void RLEListExportToString_aux(char* exportStr, RLEList ptr, int digits[], int nodes, int digitCount)
+static void RLEListExportToString_aux(char* exportStr, RLEList ptr, int digits[], int nodes, int digitCount)
 {
     int currIndex = 0;
     for(int i=0; i<nodes; i++) {
@@ -186,7 +246,7 @@ void RLEListExportToString_aux(char* exportStr, RLEList ptr, int digits[], int n
     exportStr[(nodes*2)+digitCount] = '\0';
 }
 
-int countNodes(RLEList list)
+static int countNodes(RLEList list)
 {
     RLEList ptr = list;
     int count = 0;
@@ -196,7 +256,7 @@ int countNodes(RLEList list)
     }
     return count;
 }
-int countDigits(RLEList list, int arr[])
+static int countDigits(RLEList list, int arr[])
 {
     RLEList ptr = list;
     int count = 0;
@@ -213,7 +273,7 @@ int countDigits(RLEList list, int arr[])
     }
     return count;
 }
-int calcPow(int a, int b)
+static int calcPow(int a, int b)
 {
     int ans = 1;
     while(b>0) {

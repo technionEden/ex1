@@ -52,15 +52,7 @@ RLEList asciiArtRead(FILE* in_stream);
 RLEListResult asciiArtPrint(RLEList list, FILE *out_stream);
 
 
-/**
-* asciiInvertCharacter: Inverts characters per guidelines.
-* Guidelines: [space] -> @ , @ -> [space], [other char] -> [stays the same]
-*
-* @param value - Ascii value that needs to be inverted.
-* @return
-* 	Inverted ascii value.
-*/
-char asciiInvertCharacter(char value);
+
 
 
 /**
