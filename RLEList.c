@@ -207,8 +207,8 @@ char RLEListGet(RLEList list, int index, RLEListResult *result)
         amountLetters += ptr->amount;
         ptr = ptr->next;
     }
-    if(ptr->letter){
-        *result =  RLE_LIST_SUCCESS;
+    if(ptr){
+        result =  RLE_LIST_SUCCESS; // WHY not *result????
         return ptr->letter;
     }
     return 0;
