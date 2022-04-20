@@ -4,7 +4,7 @@
 
 #include "/home/mtm/public/2122b/ex1/RLEList.h"
 #include "test_utilities.h"
-#include "RLEList.c"
+#include "../RLEList.c"
 
 typedef bool (*testFunc)(void);
 
@@ -78,7 +78,7 @@ bool basicTest(){
     char it;
     for(int i=0; i<RLEListSize(list); i++)
     {
-        it=RLEListGet(list, i, NULL);
+        it=RLEListGet(list, i, NULL); 
         ASSERT_TEST(it == s[i++], destroy);
     }
     //check if the length's are equal

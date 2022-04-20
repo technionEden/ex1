@@ -1,4 +1,4 @@
-#include "RLEList.h"
+#include "/home/mtm/public/2122b/ex1/RLEList.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -193,7 +193,9 @@ static void RLEListCleanUp(RLEList prevNode)
 char RLEListGet(RLEList list, int index, RLEListResult *result)
 {
     if(!list) {
-        *result =  RLE_LIST_NULL_ARGUMENT;
+        if(result) {
+            *result =  RLE_LIST_NULL_ARGUMENT;
+        }
         return 0;
     }
     if(RLEListSize(list)<index || index<0) {
@@ -208,7 +210,9 @@ char RLEListGet(RLEList list, int index, RLEListResult *result)
         ptr = ptr->next;
     }
     if(ptr){
-        result =  RLE_LIST_SUCCESS; // WHY not *result????
+        if(result) {
+            *result =  RLE_LIST_SUCCESS;
+        }
         return ptr->letter;
     }
     return 0;
@@ -219,7 +223,9 @@ char RLEListGet(RLEList list, int index, RLEListResult *result)
 char* RLEListExportToString(RLEList list, RLEListResult* result)
 {
     if (!list){
-        *result = RLE_LIST_NULL_ARGUMENT;
+        if(result) {
+            *result =  RLE_LIST_NULL_ARGUMENT;
+        }
         return NULL;
     }
     // BUGGY!!! If I just have the HEAD ('$'), does it count as a NULL or not? Here I act as if it's not NULL.
@@ -231,7 +237,9 @@ char* RLEListExportToString(RLEList list, RLEListResult* result)
 
     RLEListExportToString_aux(exportStr, list->next, digits, nodes, digitCount);
 
-    *result = RLE_LIST_SUCCESS;
+    if(result) {
+        *result =  RLE_LIST_SUCCESS;
+    }
     free(digits);
     return exportStr;
 }
