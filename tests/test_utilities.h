@@ -26,26 +26,26 @@
  * If expr is false, ends the test by returning false and prints a detailed
  * message about the failure.
  */
-#define ASSERT_TEST(expr, goto_label)
-     do {
-         if (!(expr)) {
-             printf("\nAssertion failed at %s:%d %s ", __FILE__, __LINE__, #expr);
-             result = false;
-             goto goto_label;
-         }
+#define ASSERT_TEST(expr, goto_label)                                                         \
+     do {                                                                          \
+         if (!(expr)) {                                                            \
+             printf("\nAssertion failed at %s:%d %s ", __FILE__, __LINE__, #expr); \
+             result = false;                                                       \
+             goto goto_label;                                                         \
+         }                                                                         \
      } while (0)
 
 /**
  * Macro used for running a test from the main function
  */
-#define RUN_TEST(test, name)
-    do {
-      printf("Running %s ... ", name);
-        if (test()) {
-            printf("[OK]\n");
-        } else {
-            printf("[Failed]\n");
-        }
+#define RUN_TEST(test, name)                  \
+    do {                                 \
+      printf("Running %s ... ", name);   \
+        if (test()) {                    \
+            printf("[OK]\n");            \
+        } else {                         \
+            printf("[Failed]\n");        \
+        }                                \
     } while (0)
 
 
