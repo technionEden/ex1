@@ -1,4 +1,4 @@
-#include "/home/mtm/public/2122b/ex1/RLEList.h"
+#include "./RLEList.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -198,14 +198,14 @@ char RLEListGet(RLEList list, int index, RLEListResult *result)
         }
         return 0;
     }
-    if(RLEListSize(list)<=index || index<0) {
+    if(RLEListSize(list)<=index || index<0) { // CHANGED
         *result =  RLE_LIST_INDEX_OUT_OF_BOUNDS;
         return 0;
     }
 
     RLEList ptr = list;
     int amountLetters = 0;
-    while(ptr && amountLetters + ptr->amount <= index) {
+    while(ptr && amountLetters + ptr->amount <= index  ) { // CHANGED
         amountLetters += ptr->amount;
         ptr = ptr->next;
     }
@@ -307,6 +307,7 @@ RLEListResult RLEListMap(RLEList list, MapFunction map_function)
     RLEList newList = RLEListCreate();
     int listSize = RLEListSize(list);
     if (listSize<0){
+        RLEListDestroy(newList);
        return RLE_LIST_NULL_ARGUMENT;
     }
     RLEListResult result = RLE_LIST_SUCCESS;
@@ -322,9 +323,10 @@ RLEListResult RLEListMap(RLEList list, MapFunction map_function)
     for(int i=0; i<listSize && result==RLE_LIST_SUCCESS;i++) {
         result = RLEListAppend(list, RLEListGet(newList,i,&result));
     }
-
+    RLEListDestroy(newList);
     return result;
 }
+
 
 
 
