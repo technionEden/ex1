@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 /**
-*   RLEListAppend_aux: adds value to list. 
+*   RLEListAppend_aux: Aadds value to list. 
 *
 * @param finalPtr - The final node in the list.
 * @param value - The character which needs to be added.
