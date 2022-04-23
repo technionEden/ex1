@@ -1,4 +1,4 @@
-#include "./RLEList.h"
+#include "/home/mtm/public/2122b/ex1/RLEList.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -198,14 +198,14 @@ char RLEListGet(RLEList list, int index, RLEListResult *result)
         }
         return 0;
     }
-    if(RLEListSize(list)<=index || index<0) { // CHANGED
+    if(RLEListSize(list)<=index || index<0) { 
         *result =  RLE_LIST_INDEX_OUT_OF_BOUNDS;
         return 0;
     }
 
     RLEList ptr = list;
     int amountLetters = 0;
-    while(ptr && amountLetters + ptr->amount <= index  ) { // CHANGED
+    while(ptr && amountLetters + ptr->amount <= index  ) { 
         amountLetters += ptr->amount;
         ptr = ptr->next;
     }
@@ -233,7 +233,7 @@ char* RLEListExportToString(RLEList list, RLEListResult* result)
     int* digits = malloc(sizeof(int)*(nodes));
     int digitCount = countDigits(list->next, digits);
 
-    char* exportStr = malloc(sizeof(char)*((nodes*2)+digitCount+1)); // MAKE SURE OUTSIDE THERE'S FREE()
+    char* exportStr = malloc(sizeof(char)*((nodes*2)+digitCount+1));
 
     RLEListExportToString_aux(exportStr, list->next, digits, nodes, digitCount);
 
@@ -300,7 +300,6 @@ static int calcPow(int a, int b)
 
 RLEListResult RLEListMap(RLEList list, MapFunction map_function)
 {
-    // TODO: check for character turnt to NULL (update inverCharacter to return null)
     if (!list || !map_function) {
         return RLE_LIST_NULL_ARGUMENT;
     }
