@@ -198,14 +198,14 @@ char RLEListGet(RLEList list, int index, RLEListResult *result)
         }
         return 0;
     }
-    if(RLEListSize(list)<index || index<0) {
+    if(RLEListSize(list)<=index || index<0) {
         *result =  RLE_LIST_INDEX_OUT_OF_BOUNDS;
         return 0;
     }
 
     RLEList ptr = list;
     int amountLetters = 0;
-    while(amountLetters + ptr->amount <= index  && ptr) {
+    while(ptr && amountLetters + ptr->amount <= index) {
         amountLetters += ptr->amount;
         ptr = ptr->next;
     }
